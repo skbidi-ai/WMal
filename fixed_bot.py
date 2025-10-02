@@ -4919,9 +4919,17 @@ async def on_ready():
 
 # Note: run the bot as usual: bot.run("YOUR_TOKEN") in your main runner script.
 
+import os
+from dotenv import load_dotenv
+
+# Load .env if it exists
+load_dotenv()
+
+TOKEN = os.getenv("DISCORD_TOKEN")
+
 # ---------------- Bot wrapper class ----------------
 class DiscordBot:
-    def __init__(self):
+    def __init__(self, bot):
         self.bot = bot
 
     async def start(self, token):
@@ -4935,3 +4943,5 @@ try:
     load_pet_data()
 except Exception as e:
     logger.error(f"Failed to load pet data at module import: {e}")
+
+print("Loaded token:", TOKEN)  # Debug at END
